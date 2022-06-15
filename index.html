@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/hui-calendar/assets/favicon.17e50649.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <script type="module" crossorigin src="/hui-calendar/assets/index.6fd16a6b.js"></script>
+    <link rel="stylesheet" href="/hui-calendar/assets/index.85c20fe0.css">
+  </head>
+  <body>
+    <div id="app">
+      <div class="calendar">
+        <div class="hero">
+          <div class="title"></div>
+          <div
+            class="absolute bottom-0 right-4 text-white space-x-5 px-2 mb-4 z-10"
+          >
+            <button id="prev">PREV</button>
+            <button id="next">NEXT</button>
+          </div>
+        </div>
+
+        <div class="calendar-body relative">
+          <div class="week">
+            <span class="cell week-cell">SUN</span>
+            <span class="cell week-cell">MON</span>
+            <span class="cell week-cell">TUES</span>
+            <span class="cell week-cell">WED</span>
+            <span class="cell week-cell">THUR</span>
+            <span class="cell week-cell">FRI</span>
+            <span class="cell week-cell">STA</span>
+          </div>
+          <div class="days"></div>
+          <div class="panel">
+            <div class="flex justify-end">
+              <button id="panel-close">x</button>
+            </div>
+            <ul class="panel-list"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </body>
+</html>
