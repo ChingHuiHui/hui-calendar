@@ -88,6 +88,16 @@ class Calendar {
         }
 
         days.appendChild(dateCell)
+
+        const { offsetLeft, offsetTop } =
+          days.children[days.children.length - 1]
+
+        const inner = document.createElement('div')
+        inner.classList.add('inner')
+        inner.style.left = `${offsetLeft}px`
+        inner.style.top = `${offsetTop}px`
+
+        dateCell.appendChild(inner)
       }
     )
   }
@@ -146,10 +156,18 @@ days.addEventListener('click', (e) => {
 
   const dates = Array.from(days.children)
 
-  dates.forEach((child) => child.classList.remove('active'))
+  dates.forEach((child) => {
+    child.classList.remove('active')
+  })
 
   if (!target.classList.contains('date-cell')) return
 
   target.classList.add('active')
+  target.children[0].classList.add('active')
+
   calendar.active = target.dataset.date || ''
+})
+
+window.addEventListener('resize', () => {
+  calendar.render()
 })

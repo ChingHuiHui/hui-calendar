@@ -8,15 +8,18 @@
   </head>
   <body>
     <div id="app">
-      <div class="flex justify-end space-x-5 px-2 mb-4">
-        <button id="prev">PREV</button>
-        <button id="next">NEXT</button>
-      </div>
       <div class="calendar">
         <div class="hero">
           <div class="title"></div>
+          <div
+            class="absolute bottom-0 right-4 text-white space-x-5 px-2 mb-4 z-10"
+          >
+            <button id="prev">PREV</button>
+            <button id="next">NEXT</button>
+          </div>
         </div>
-        <div class="calendar-body">
+
+        <div class="calendar-body relative">
           <div class="week">
             <span class="cell week-cell">SUN</span>
             <span class="cell week-cell">MON</span>
@@ -26,34 +29,7 @@
             <span class="cell week-cell">FRI</span>
             <span class="cell week-cell">STA</span>
           </div>
-          <div class="days">
-            <time class="cell date-cell">1</time>
-            <time class="cell date-cell">2</time>
-            <time class="cell date-cell">2</time>
-            <time class="cell date-cell">1</time>
-            <time class="cell date-cell">2</time>
-            <time class="cell date-cell">2</time>
-            <time class="cell date-cell">1</time>
-            <time class="cell date-cell">2</time>
-            <time class="cell date-cell">2</time>
-            <time class="cell date-cell">1</time>
-            <time class="cell date-cell">2</time>
-            <time class="cell date-cell">2</time>
-            <time class="cell date-cell">1</time>
-            <time class="cell date-cell">2</time>
-            <time class="cell date-cell">2</time>
-            <time class="cell date-cell">1</time>
-            <time class="cell date-cell">2</time>
-            <time class="cell date-cell">2</time>
-            <time class="cell date-cell">2</time>
-            <time class="cell date-cell">2</time>
-            <time class="cell date-cell">1</time>
-            <time class="cell date-cell">2</time>
-            <time class="cell date-cell">2</time>
-            <time class="cell date-cell">1</time>
-            <time class="cell date-cell">2</time>
-            <time class="cell date-cell">2</time>
-          </div>
+          <div class="days"></div>
         </div>
       </div>
     </div>
