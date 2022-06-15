@@ -61,13 +61,29 @@ body {
   }
 }
 
-.inner {
+.tag {
   @apply absolute top-0 left-0;
-  @apply w-2 h-1 bg-red-400  transition-all duration-300 z-20;
+  @apply w-2 h-1   transition-all duration-300 z-20;
+
+  &.emergency {
+    @apply bg-red-400;
+  }
+
+  &.normal {
+    @apply bg-green-600;
+  }
 }
 
 .panel {
-  @apply w-0 h-0 bg-red-200 absolute transition-all duration-300 z-20 overflow-hidden;
+  @apply w-0 h-0  absolute transition-all duration-300 z-20 overflow-hidden;
+
+  &.emergency {
+    @apply bg-red-200;
+  }
+
+  &.normal {
+    @apply bg-green-200;
+  }
 
   &.active {
     @apply rounded-none cursor-default w-full h-full p-2;

@@ -1,5 +1,10 @@
 import './style.scss'
 
+enum STATUS {
+  EMERGENCY,
+  NORMAL,
+}
+
 enum MODE {
   MONTH,
   DAY,
@@ -7,6 +12,12 @@ enum MODE {
 
 type DateItem = {
   date: string
+}
+
+type Task = {
+  date: string
+  todo: string[]
+  status: STATUS
 }
 
 const panel = document.querySelector('.panel') as HTMLDivElement
@@ -44,12 +55,6 @@ function formatDate(dateStr: string): string {
   return `${year}-${month}-${date}`
 }
 
-type Task = {
-  date: string
-  todo: string[]
-  status: string
-}
-
 class Tasks {
   constructor(public items: Task[]) {}
 
@@ -63,8 +68,16 @@ class Tasks {
     )
   }
 
-  haveTask(date?: string) {
+  haveTask(date?: string): boolean {
     return this.getTasks(date).length > 0
+  }
+
+  haveEmergency(date?: string): boolean {
+    return (
+      this.getTasks(date).filter(
+        ({ status }: { status: STATUS }) => status === STATUS.EMERGENCY
+      ).length > 0
+    )
   }
 }
 
@@ -78,10 +91,6 @@ class Calendar {
 
   get firstDayInCurrentMonth() {
     return new Date(this.year, this.month, 1).getDay()
-  }
-
-  set active(date: string) {
-    this.activeDate = date
   }
 
   #buildPrevDates(): DateItem[] {
@@ -136,10 +145,15 @@ class Calendar {
         }
 
         if (tasks.haveTask(date)) {
-          const inner = document.createElement('div')
-          inner.classList.add('inner')
+          dateCell.classList.add('hover:border-blue-300')
+          dateCell.classList.add('cursor-pointer')
 
-          dateCell.appendChild(inner)
+          const tag = document.createElement('div')
+
+          tag.classList.add('tag')
+          tag.classList.add(tasks.haveEmergency(date) ? 'emergency' : 'normal')
+
+          dateCell.appendChild(tag)
         }
 
         days.appendChild(dateCell)
@@ -200,9 +214,16 @@ days.addEventListener('click', (e) => {
     return
   }
 
-  calendar.active = target.dataset.date || ''
+  calendar.activeDate = target.dataset.date || ''
+
+  panel.classList.remove('emergency')
+  panel.classList.remove('normal')
 
   panel.classList.add('active')
+  panel.classList.add(
+    tasks.haveEmergency(calendar.activeDate) ? 'emergency' : 'normal'
+  )
+
   target.classList.add('active')
 
   const todoList = tasks
@@ -216,12 +237,9 @@ days.addEventListener('click', (e) => {
 
 days.addEventListener('mouseover', (e) => {
   const target = e.target as HTMLDivElement
+  console.log(target)
 
   if (!target.classList.contains('date-cell')) return
-
-  if (tasks.haveTask(target.dataset.date)) {
-    target.classList.add('hover:border-blue-400', 'cursor-pointer')
-  }
 
   const { offsetLeft, offsetTop } = target as HTMLDivElement
 
@@ -248,8 +266,13 @@ window.addEventListener('resize', () => {
 const tasks = new Tasks([
   {
     date: '2022-06-12',
-    todo: ['Have Meeting', 'develop a project'],
-    status: 'warning',
+    todo: ['Have Meeting', 'Develop a project'],
+    status: STATUS.NORMAL,
+  },
+  {
+    date: '2022-06-13',
+    todo: ['Write Document', 'Finish the project'],
+    status: STATUS.EMERGENCY,
   },
 ])
 
