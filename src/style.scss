@@ -1,3 +1,52 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+html,body {
+  @apply flex justify-center items-center min-h-screen bg-gray-100 font-mono;
+}
+
+
+.calendar {
+  @apply bg-white rounded-t-2xl overflow-hidden w-full;
+}
+
+.week, .days {
+  @apply grid grid-cols-7;
+}
+
+.cell {
+  @apply inline-block border w-12 text-sm sm:w-20 sm:text-base;
+
+  &.date-cell {
+    @apply p-2 h-12 sm:h-20;
+  }
+
+  &.week-cell {
+    @apply px-4 py-2 flex justify-center font-bold;
+  }
+}
+
+
+
+.hero {
+  @apply relative h-56;
+
+  background-image: url('https://picsum.photos/400/300?random=1');
+
+  &::after {
+    content: '';
+
+    @apply absolute inset-0 bg-black bg-opacity-40;
+  }
+
+  .title {
+    @apply absolute inset-0 z-10;
+    @apply text-6xl text-white font-bold flex justify-center items-center;
+
+   
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: cadetblue;
+  }
+}
