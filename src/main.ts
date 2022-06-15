@@ -237,7 +237,6 @@ days.addEventListener('click', (e) => {
 
 days.addEventListener('mouseover', (e) => {
   const target = e.target as HTMLDivElement
-  console.log(target)
 
   if (!target.classList.contains('date-cell')) return
 
