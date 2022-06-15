@@ -4,7 +4,12 @@
 
 
 html,body {
-  @apply flex justify-center items-center min-h-screen bg-gray-100 font-mono;
+  @apply w-full h-full m-0 bg-gray-100 font-mono;
+  @apply flex justify-center;
+}
+
+#app {
+  @apply px-4 mt-20;
 }
 
 
@@ -17,10 +22,22 @@ html,body {
 }
 
 .cell {
-  @apply inline-block border w-12 text-sm sm:w-20 sm:text-base;
+  @apply inline-block border w-10 text-xs sm:w-20 md:w-24 sm:text-base;
 
   &.date-cell {
-    @apply p-2 h-12 sm:h-20;
+    @apply p-2 h-10 sm:h-20 md:h-24;
+
+    &:hover {
+      @apply border-blue-300 cursor-pointer;
+    }
+
+    &.active {
+      @apply border-blue-400;
+    }
+
+    &.prev-month {
+      @apply text-gray-300;
+    }
   }
 
   &.week-cell {
@@ -31,7 +48,7 @@ html,body {
 
 
 .hero {
-  @apply relative h-56;
+  @apply relative h-32 sm:h-56 bg-center bg-no-repeat bg-cover;
 
   background-image: url('https://picsum.photos/400/300?random=1');
 
@@ -43,7 +60,7 @@ html,body {
 
   .title {
     @apply absolute inset-0 z-10;
-    @apply text-6xl text-white font-bold flex justify-center items-center;
+    @apply text-3xl sm:text-6xl text-white font-bold flex justify-center items-center;
 
    
     -webkit-text-stroke-width: 1px;

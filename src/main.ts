@@ -35,6 +35,10 @@ class Calendar {
     return new Date(this.year, this.month, 1).getDay()
   }
 
+  set active(date: string) {
+    this.activeDate = date
+  }
+
   #buildPrevDates(): DateItem[] {
     const dayOfFirstDate = this.firstDayInCurrentMonth
 
@@ -77,6 +81,11 @@ class Calendar {
         const dateCell = document.createElement('time')
         dateCell.className = 'cell date-cell'
         dateCell.innerText = getDate(dateItem.date)
+        dateCell.dataset.date = dateItem.date
+
+        if (new Date(dateItem.date).getMonth() !== this.month) {
+          dateCell.classList.add('prev-month')
+        }
 
         days.appendChild(dateCell)
       }
@@ -130,4 +139,17 @@ prev.addEventListener('click', () => {
 
 next.addEventListener('click', () => {
   calendar.next()
+})
+
+days.addEventListener('click', (e) => {
+  const target = e.target as HTMLDivElement
+
+  const dates = Array.from(days.children)
+
+  dates.forEach((child) => child.classList.remove('active'))
+
+  if (!target.classList.contains('date-cell')) return
+
+  target.classList.add('active')
+  calendar.active = target.dataset.date || ''
 })
