@@ -25,11 +25,7 @@ body {
   @apply inline-block border w-10 text-xs sm:w-16 2xl:w-20 sm:text-base;
 
   &.date-cell {
-    @apply p-2 h-10 sm:h-16 2xl:h-24;
-
-    &:hover {
-      @apply border-blue-300 cursor-pointer;
-    }
+    @apply relative p-2 h-10 sm:h-16 2xl:h-24;
 
     &.active {
       @apply border-blue-400;
@@ -66,16 +62,37 @@ body {
 }
 
 .inner {
-  @apply w-2 h-1 bg-red-400 absolute transition-all duration-300 z-20;
+  @apply absolute top-0 left-0;
+  @apply w-2 h-1 bg-red-400  transition-all duration-300 z-20;
+}
+
+.panel {
+  @apply w-0 h-0 bg-red-200 absolute transition-all duration-300 z-20 overflow-hidden;
 
   &.active {
-    @apply rounded-none cursor-default p-4;
+    @apply rounded-none cursor-default w-full h-full p-2;
 
     left: 0 !important;
-    right: 0 !important;
     top: 0 !important;
-    bottom: 0 !important;
-    width: 100%;
-    height: 100%;
+
+    ul {
+      @apply pl-2;
+    }
+  }
+
+  ul {
+    @apply opacity-0 list-disc font-bold;
+
+    animation: fade-in 2s forwards;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    @apply opacity-0;
+  }
+
+  100% {
+    @apply opacity-100;
   }
 }
