@@ -34,6 +34,10 @@ body {
     &.prev-month {
       @apply text-gray-300;
     }
+
+    &.have-task {
+      @apply hover:border-blue-300 cursor-pointer;
+    }
   }
 
   &.week-cell {
