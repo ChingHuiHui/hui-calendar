@@ -5,23 +5,25 @@
     <link rel="icon" type="image/svg+xml" href="/hui-calendar/assets/favicon.17e50649.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
-    <script type="module" crossorigin src="/hui-calendar/assets/index.6fd16a6b.js"></script>
-    <link rel="stylesheet" href="/hui-calendar/assets/index.85c20fe0.css">
+    <script type="module" crossorigin src="/hui-calendar/assets/index.4ac20183.js"></script>
+    <link rel="stylesheet" href="/hui-calendar/assets/index.d37ac165.css">
   </head>
   <body>
     <div id="app">
+      <div class="flex justify-end p-2">
+        <button id="mode-button">Change Mode</button>
+      </div>
       <div class="calendar">
         <div class="hero">
           <div class="title"></div>
-          <div
-            class="absolute bottom-0 right-4 text-white space-x-5 px-2 mb-4 z-10"
-          >
+          <div class="control-buttons">
             <button id="prev">PREV</button>
             <button id="next">NEXT</button>
           </div>
         </div>
 
-        <div class="calendar-body relative">
+        <div class="calendar-body">
+          <div class="day-body">123</div>
           <div class="week">
             <span class="cell week-cell">SUN</span>
             <span class="cell week-cell">MON</span>
