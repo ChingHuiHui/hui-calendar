@@ -128,37 +128,64 @@ class Calendar {
     return dates
   }
 
+  #buildRemainingDates(): DateItem[] {
+    const currentDates = [
+      ...this.#buildPrevDates(),
+      ...this.#buildCurrentDates(),
+    ]
+
+    const nextMonth = this.month + 1
+
+    const remainingNumber = currentDates.length % 7
+    const remainingDates = remainingNumber === 0 ? 0 : 7 - remainingNumber
+
+    let dates: DateItem[] = []
+
+    for (let i = 0; i < remainingDates; i++) {
+      const date = new Date(this.year, nextMonth, i + 1).toISOString()
+
+      dates = [...dates, { date }]
+    }
+
+    return dates
+  }
+
   #buildDateCells(): void {
     days.innerHTML = ''
-    ;[...this.#buildPrevDates(), ...this.#buildCurrentDates()].forEach(
-      (dateItem) => {
-        const dateCell = document.createElement('time')
 
-        const { date } = dateItem
+    let dates = [
+      ...this.#buildPrevDates(),
+      ...this.#buildCurrentDates(),
+      ...this.#buildRemainingDates(),
+    ]
 
-        dateCell.className = 'cell date-cell'
-        dateCell.innerText = getDate(date)
-        dateCell.dataset.date = date
+    dates.forEach((dateItem) => {
+      const dateCell = document.createElement('time')
 
-        if (new Date(date).getMonth() !== this.month) {
-          dateCell.classList.add('prev-month')
-        }
+      const { date } = dateItem
 
-        if (tasks.haveTask(date)) {
-          dateCell.classList.add('hover:border-blue-300')
-          dateCell.classList.add('cursor-pointer')
+      dateCell.className = 'cell date-cell'
+      dateCell.innerText = date ? getDate(date) : ''
+      dateCell.dataset.date = date
 
-          const tag = document.createElement('div')
-
-          tag.classList.add('tag')
-          tag.classList.add(tasks.haveEmergency(date) ? 'emergency' : 'normal')
-
-          dateCell.appendChild(tag)
-        }
-
-        days.appendChild(dateCell)
+      if (new Date(date).getMonth() !== this.month) {
+        dateCell.classList.add('prev-month')
       }
-    )
+
+      if (tasks.haveTask(date)) {
+        dateCell.classList.add('hover:border-blue-300')
+        dateCell.classList.add('cursor-pointer')
+
+        const tag = document.createElement('div')
+
+        tag.classList.add('tag')
+        tag.classList.add(tasks.haveEmergency(date) ? 'emergency' : 'normal')
+
+        dateCell.appendChild(tag)
+      }
+
+      days.appendChild(dateCell)
+    })
   }
 
   #renderHero(): void {
@@ -258,10 +285,6 @@ prev.addEventListener('click', () => {
 
 next.addEventListener('click', () => {
   calendar.next()
-})
-
-window.addEventListener('resize', () => {
-  calendar.render()
 })
 
 const tasks = new Tasks([
