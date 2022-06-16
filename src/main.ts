@@ -215,6 +215,7 @@ days.addEventListener('click', (e) => {
   }
 
   calendar.activeDate = target.dataset.date || ''
+  const date = getDate(calendar.activeDate)
 
   panel.classList.remove('emergency')
   panel.classList.remove('normal')
@@ -223,6 +224,7 @@ days.addEventListener('click', (e) => {
   panel.classList.add(
     tasks.haveEmergency(calendar.activeDate) ? 'emergency' : 'normal'
   )
+  panel.dataset.date = date
 
   target.classList.add('active')
 

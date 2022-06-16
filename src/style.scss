@@ -75,7 +75,14 @@ body {
 }
 
 .panel {
-  @apply w-0 h-0  absolute transition-all duration-300 z-20 overflow-hidden;
+  @apply w-0 h-0 absolute transition-all duration-300 z-20 overflow-hidden;
+
+  &::after {
+    content: attr(data-date);   
+
+    @apply absolute inset-0 flex justify-end items-end -z-10;
+    @apply text-[15rem] text-opacity-40 text-white leading-none	pointer-events-none;
+  }  
 
   &.emergency {
     @apply bg-red-200;
